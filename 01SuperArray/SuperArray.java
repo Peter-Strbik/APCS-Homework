@@ -78,8 +78,7 @@ public class SuperArray{
 
     public Object set(int index, Object o){
 	if (index < 0 || index >= curStored){
-	    System.out.println("Error: Index out of range.");
-	    return null;
+	    throw new IndexOutOfBoundsException();
 	}
 	Object former = YAAS[index];
 	YAAS[index] = o;
@@ -88,8 +87,7 @@ public class SuperArray{
 
     public Object remove(int index){
 	if (index < 0 || index >= curStored){
-	    System.out.println("Error: Index out of range.");
-	    return null;
+	    throw new IndexOutOfBoundsException();
 	}
 	Object RKO = YAAS[index];
 
