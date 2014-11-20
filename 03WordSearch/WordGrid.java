@@ -9,14 +9,14 @@ public class WordGrid{
      */
     public WordGrid(int rows, int cols){
 	data = new char[rows][cols];
-	data.clear();
+        clear();
     }
 
     /**Set all values in the WordGrid to spaces ' '*/
     private void clear(){
 	for (int i = 0; i < data.length; i++){
 	    for (int j = 0; j < data[i].length; j++){
-		data[i][j] = " ";
+		data[i][j] = ' ';
 	    }
 	}
     }
