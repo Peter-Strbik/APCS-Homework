@@ -13,5 +13,9 @@ public class Test{
 	System.out.println(g);
 	g.addWordVertical("SHREKD", 4, 7);
 	System.out.println(g);
+	g.addWordDiagonal("YOUWOT", 3, 0);
+	System.out.println(g);
+	g.addWordDiagonal("GAMER", 7, 3);
+	System.out.println(g);
     }
 }
