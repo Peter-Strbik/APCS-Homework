@@ -43,32 +43,32 @@ public class WordGrid{
 	return res;
     }
 
-    /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from left to right, must fit on the WordGrid, and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any text to be added to the word grid.
-     *@param row is the vertical locaiton of where you want the word to start.
+    public boolean addWord(String word, int row, int col, int dx, int dy){
+	
+    }
+
+    /**Checks if a given word can be added to the puzzle.
+     *@param word is the word to be added to the grid.
+     *@param row is the vertical location of where you want the word to start.
      *@param col is the horizontal location of where you want the word to start.
+     *@param dx ranges from -1 to 1, specifies the direction of the word in the horizontal direction.
+     *@param dy ranges from -1 to 1, specifies the direciton of the word in the vertical direction.
      *@return true when the word is added successfully. When the word doesn't fit,
-     *or there are overlapping letters that do not match, then false is returned.
+     *or there are overlapping letter that do not match, then false is returned.
      */
-    public boolean addWordHorizontal(String word, int row, int col){
-	boolean done = false;
-	if(data[row].length - col < word.length()){
+    
+    private boolean checkWord(String word, int row, int col, int dx, int dy){
+	if (dx > 1 || dx < -1 || dy > 1 || dy < 1 || (dx == 0 && dy == 0) ||
+	    (dx == 1 && word.length() > data[0].length)|| (dy == 1 && word.length() > data.length)){
 	    return false;
 	}
-	for(int i = 0; i < word.length(); i++){
-	    if (data[row][col+i] == '_' || data[row][col+i] == word.charAt(i)){
-	    }
-	    else{
+	for (int i = 0; i < word.length() ; i++){
+	    if ((row + i*dy < 0 || row + i*dy >= data.length || col + i*dx < 0 || col + i*dx >= data[0].length)
+		|| (data[row+i*dy][col+i*dx] != '_' && word.charAt(i) != data[row+i*dy][col+i*dx])){
 		return false;
 	    }
 	}
-	for(int j = 0; j < word.length(); j++){
-	    data[row][col+j] = word.charAt(j);
-	}
 	return true;
     }
-
+    
 }
