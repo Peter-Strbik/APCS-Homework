@@ -1,5 +1,11 @@
+import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class WordGrid{
     private char[][]data;
+    private ArrayList<String> wordsleft = new ArrayList<String>();
+    private Random rand = new Random();
 
 
     /**Initialize the grid to the size specified and fill all of the positions
@@ -19,7 +25,7 @@ public class WordGrid{
 	clear();
     }
 
-    /**Set all values in the WordGrid to spaces ' '*/
+    /**Set all values in the WordGrid to underscores '_'*/
     private void clear(){
 	for (int i = 0; i < data.length; i++){
 	    for (int j = 0; j < data[i].length; j++){
@@ -44,7 +50,13 @@ public class WordGrid{
     }
 
     public boolean addWord(String word, int row, int col, int dx, int dy){
-	
+	if (checkWord(word, row, col, dx, dy)){
+	    for (int i = 0; i < word.length(); i++){
+		data[row+i*dy][col+i*dx] = word.charAt(i);
+	    }
+	    return true;
+	}
+	return false; 
     }
 
     /**Checks if a given word can be added to the puzzle.
@@ -55,11 +67,11 @@ public class WordGrid{
      *@param dy ranges from -1 to 1, specifies the direciton of the word in the vertical direction.
      *@return true when the word is added successfully. When the word doesn't fit,
      *or there are overlapping letter that do not match, then false is returned.
-     */
-    
+     */  
     private boolean checkWord(String word, int row, int col, int dx, int dy){
 	if (dx > 1 || dx < -1 || dy > 1 || dy < 1 || (dx == 0 && dy == 0) ||
-	    (dx == 1 && word.length() > data[0].length)|| (dy == 1 && word.length() > data.length)){
+	    ((dx == 1 || dx == -1) && word.length() > data[0].length)||
+	    ((dy == 1 || dy == -1) && word.length() > data.length)){
 	    return false;
 	}
 	for (int i = 0; i < word.length() ; i++){
@@ -70,5 +82,4 @@ public class WordGrid{
 	}
 	return true;
     }
-    
 }
