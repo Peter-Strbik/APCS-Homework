@@ -4,24 +4,26 @@ import java.io.FileNotFoundException;
 
 public class WordGrid{
     private char[][]data;
-    private ArrayList<String> wordsleft = new ArrayList<String>();
-    private Random rand = new Random();
+    private ArrayList<String> wordsInGrid;
+    private Random rand;
 
 
     /**Initialize the grid to the size specified and fill all of the positions
-     *with spaces.
+     *with underscores.
      *@param row is the starting height of the WordGrid
      *@param col is the starting width of the WordGrid
      */
-    public WordGrid(int rows, int cols){
+    public WordGrid(int rows, int cols, long seed){
 	data = new char[rows][cols];
+	rand = new Random(seed);
         clear();
     }
     /**Initialize the grid to the default size of 10 by 10 and fill all the
-     *positions with spaces.
+     *positions with underscores.
      */
     public WordGrid(){
 	data = new char[10][10];
+	rand = new Random();
 	clear();
     }
 
@@ -33,6 +35,8 @@ public class WordGrid{
 	    }
 	}
     }
+
+    public loadWordsFromFile(String filename, 
 
     /**The proper formatting for a WordGrid is created in the toString.
      *@return a String with each character separated by spaces, and each row
