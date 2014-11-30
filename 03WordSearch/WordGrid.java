@@ -4,21 +4,8 @@ import java.io.FileNotFoundException;
 
 public class WordGrid{
     private char[][]data;
-    private ArrayList<String> wordsInGrid;
-    private Random rand;
-
-
-    /**Initialize the grid to the size specified and fill all of the positions
-     *with underscores.
-     *@param row is the starting height of the WordGrid
-     *@param col is the starting width of the WordGrid
-     *@param seed is the random seed used to generate the WordGrid
-     */
-    public WordGrid(int rows, int cols, long seed){
-	data = new char[rows][cols];
-	rand = new Random(seed);
-        clear();
-    }
+    private ArrayList<String> wordsInGrid = new ArrayList<String>();
+    private Random rand = new Random();
 
     /**Initialize the grid to the size specified and fill all of the positions
      *with underscores.
@@ -27,7 +14,6 @@ public class WordGrid{
      */
     public WordGrid(int rows, int cols){
 	data = new char[rows][cols];
-	rand = new Random();
 	clear();
     }
     
@@ -36,7 +22,6 @@ public class WordGrid{
      */
     public WordGrid(){
 	data = new char[10][10];
-	rand = new Random();
 	clear();
     }
 
@@ -47,6 +32,10 @@ public class WordGrid{
 		data[i][j] = '_';
 	    }
 	}
+    }
+
+    public void setSeed(long seed){
+	rand.setSeed(seed);
     }
 
     public void loadWordsFromFile(String filename, boolean fillRandomLetters){
@@ -95,14 +84,12 @@ public class WordGrid{
 
     public void addWordRandom(ArrayList<String> words){
 	for (int i = 0; i < words.size(); i++){
-	    int counter = 0;
-	    while (counter < 50){
+	    for (int j = 0; j < 50; j++){
 		if (addWord(words.get(i), rand.nextInt(data.length), rand.nextInt(data[0].length),
 			    rand.nextInt(3) - 1, rand.nextInt(3) - 1)){
 		    wordsInGrid.add(words.get(i));
 		    break;
 		}
-		counter++;
 	    }
 	}   
     }
@@ -131,11 +118,11 @@ public class WordGrid{
 	return true;
     }
 
-    public String printWordsInGrid(){
+    public String wordsInPuzzle(){
 	String res = "";
 	for (int i = 0; i < wordsInGrid.size(); i++){
-	    res += wordsInGrid.get(i);
-	    if (i % 5 == 0){
+	    res += wordsInGrid.get(i) + " ";
+	    if (i % 5 == 0 && i != 0){
 		res += "\n";
 	    }
 	}
