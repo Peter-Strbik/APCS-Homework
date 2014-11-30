@@ -131,6 +131,17 @@ public class WordGrid{
 	return true;
     }
 
+    public String printWordsInGrid(){
+	String res = "";
+	for (int i = 0; i < wordsInGrid.size(); i++){
+	    res += wordsInGrid.get(i);
+	    if (i % 5 == 0){
+		res += "\n";
+	    }
+	}
+	return res;
+    }
+
     public void randomLetters(){
 	for (int i = 0; i < data.length; i++){
 	    for (int j = 0; j < data[0].length; j++){
