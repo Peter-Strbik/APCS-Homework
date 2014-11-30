@@ -12,14 +12,27 @@ public class WordGrid{
      *with underscores.
      *@param row is the starting height of the WordGrid
      *@param col is the starting width of the WordGrid
+     *@param seed is the random seed used to generate the WordGrid
      */
     public WordGrid(int rows, int cols, long seed){
 	data = new char[rows][cols];
 	rand = new Random(seed);
         clear();
     }
-    /**Initialize the grid to the default size of 10 by 10 and fill all the
-     *positions with underscores.
+
+    /**Initialize the grid to the size specified and fill all of the positions
+     *with underscores.
+     *@param row is the starting height of the WordGrid
+     *@param col is the starting width of the WordGrid
+     */
+    public WordGrid(int rows, int cols){
+	data = new char[rows][cols];
+	rand = new Random();
+	clear();
+    }
+    
+    /**Initialize the grid to the default 10 by 10 size and fill all of the positions
+     *with underscores.
      */
     public WordGrid(){
 	data = new char[10][10];
@@ -36,7 +49,22 @@ public class WordGrid{
 	}
     }
 
-    public loadWordsFromFile(String filename, 
+    public void loadWordsFromFile(String filename, boolean fillRandomLetters){
+	Scanner in;
+	File words = new File(filename);
+	try{
+	    in = new Scanner(words);
+	}
+	catch(FileNotFoundException e){
+	    in = new Scanner(System.in);
+	}
+	ArrayList<String> list = new ArrayList<String>();
+	while (in.hasNext()){
+	    list.add(in.next());
+	}
+	addWordRandom(list);
+	
+    }
 
     /**The proper formatting for a WordGrid is created in the toString.
      *@return a String with each character separated by spaces, and each row
@@ -61,6 +89,20 @@ public class WordGrid{
 	    return true;
 	}
 	return false; 
+    }
+
+    public void addWordRandom(ArrayList<String> words){
+	for (int i = 0; i < words.size(); i++){
+	    int counter = 0;
+	    while (counter < 50){
+		if (addWord(words.get(i), rand.nextInt(data.length), rand.nextInt(data[0].length),
+			    rand.nextInt(3) - 1, rand.nextInt(3) - 1)){
+		    wordsInGrid.add(words.get(i));
+		    break;
+		}
+		counter++;
+	    }
+	}   
     }
 
     /**Checks if a given word can be added to the puzzle.
