@@ -63,7 +63,9 @@ public class WordGrid{
 	    list.add(in.next());
 	}
 	addWordRandom(list);
-	
+	if (fillRandomLetters){
+	    randomLetters();
+	}
     }
 
     /**The proper formatting for a WordGrid is created in the toString.
@@ -128,4 +130,15 @@ public class WordGrid{
 	}
 	return true;
     }
+
+    public void randomLetters(){
+	for (int i = 0; i < data.length; i++){
+	    for (int j = 0; j < data[0].length; j++){
+		if (data[i][j] == '_'){
+		    data[i][j] = (char)('a' + rand.nextInt(26));
+		}
+	    }
+	}
+    }
+    
 }
