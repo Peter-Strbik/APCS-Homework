@@ -1,7 +1,7 @@
 public class SuperArray{
-    private Object[] YAAS;
-    private int curStored;
-    private Object[] TEMP;
+    String[] YAAS;
+    int curStored;
+    
 
     public SuperArray(){
 	YAAS = new Object[10];
@@ -9,46 +9,28 @@ public class SuperArray{
 
     public SuperArray(int capacity){
 	if (capacity < 1){
-	    YAAS = new Object[10];
+	    YAAS = new String[10];
 	}
 	else{
-	YAAS = new Object[capacity];
+	YAAS = new String[capacity];
 	}
     }
 
     public String toString(){
 	String res = "[";
-	for (int i = 0; i < YAAS.length; i++){
-	    if (YAAS[i].equals(null)){
-	    }
-	    else{
-		res += " " + YAAS[i];
-	    }
+	for (int i = 0; i < curStored; i++){
+	    res += " " + YAAS[i];
 	}
 	res += " ]";
 	return res;
     }
 
     public void add(Object e){
-	if (curStored == YAAS.length){
-	    resize(curStored + 1);
-	    for (int i = 0; i < YAAS.length; i++){
-		if (YAAS[i].equals(null)){
-		    curStored += 1;
-		    YAAS[i] = e;
-		    break;
-		}
-	    }
+	if (size() == YAAS.length){
+	    resize(curStored * 2);
 	}
-	else{
-	    for (int i = 0; i < YAAS.length; i++){
-		if (YAAS[i].equals(null)){
-		    curStored += 1;
-		    YAAS[i] = e;
-		    break;
-		}
-	    }
-	}
+	YAAS[curStored] = e;
+	curStored++;
     }
     
   
