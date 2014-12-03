@@ -4,7 +4,7 @@ public class SuperArray{
     
 
     public SuperArray(){
-	YAAS = new Object[10];
+	YAAS = new String[10];
     }
 
     public SuperArray(int capacity){
@@ -25,7 +25,7 @@ public class SuperArray{
 	return res;
     }
 
-    public void add(Object e){
+    public void add(String e){
 	if (size() == YAAS.length){
 	    resize(curStored * 2);
 	}
@@ -35,69 +35,52 @@ public class SuperArray{
     
   
 
-    public void add(int index, Object o){
-        if (curStored < YAAS.length){
-	    TEMP = new Object[YAAS.length];
-	    for (int i = 0; i < index; i++){
-		TEMP[i] = YAAS[i];
-	    }
-	    for (int i = index + 1; i < YAAS.length; i++){
-		TEMP[i] = YAAS[i];
-	    }
-	    TEMP[index] = o;
-	    YAAS = TEMP;
-	    curStored += 1;
+    public void add(int index, String o){
+	if (index < 0 || index > size()){
+	    throw new IndexOutOfBoundsException();
 	}
-	else{
-	    resize(YAAS.length + 1);
-	    TEMP = new Object[YAAS.length];
-	    for (int i = 0; i < index; i++){
-		TEMP[i] = YAAS[i];
-	    }
-	    for (int i = index + 1; i < YAAS.length; i++){
-		TEMP[i] = YAAS[i];
-	    }
-	    TEMP[index] = o;
-	    YAAS = TEMP;
-	    curStored += 1;
-	}	
+	if (size() == YAAS.length){
+	    resize(2*curStored);
+	}
+	for (int i = YAAS.length - 1; i > index; i--){
+	    YAAS[i] = YAAS[i - 1];
+	}
+	YAAS[index] = o;
+	curStored++;
     }
 
-    public Object set(int index, Object o){
+    public String set(int index, String o){
 	if (index < 0 || index >= curStored){
 	    throw new IndexOutOfBoundsException();
 	}
-	Object former = YAAS[index];
+        String former = YAAS[index];
 	YAAS[index] = o;
 	return former;
     }
 
-    public Object remove(int index){
+    public String remove(int index){
 	if (index < 0 || index >= curStored){
 	    throw new IndexOutOfBoundsException();
 	}
-	Object RKO = YAAS[index];
+        String RKO = YAAS[index];
 
-	TEMP = new Object[YAAS.length - 1];
-	for (int i = 0; i < index; i++){
-	    TEMP[i] = YAAS[i];
+	while (index < size() - 1){
+	    YAAS[index] = YAAS[index + 1];
+	    index++;
 	}
-	for (int i = index; i < TEMP.length; i++){
-	    TEMP[i] = YAAS[i+1];
+	curStored--;
+	if (curStored < YAAS.length / 4){
+	    resize(YAAS.length / 2);
 	}
-	YAAS = TEMP;
 	return RKO;
     }
     
 
     public Object get(int index){
-	if (index > curStored){
-	    System.out.println("Error: Index out of Range");
-	    return null;
+	if (index < 0 || index >= size()){
+	    throw new IndexOutOfBoundsException();
 	}
-	else{
-	    return YAAS[index];
-	}
+	return YAAS[index];
     }
 
     public int size(){
@@ -105,14 +88,14 @@ public class SuperArray{
     }
 
     public void resize(int newSize){
-	TEMP = new Object[newSize];
-	if (newSize < YAAS.length){
+	String[] TEMP = new String[newSize];
+	if (newSize < curStored){
 	    for (int i = 0; i < newSize; i++){
 		TEMP[i] = YAAS[i];
 	    }
 	}
 	else{
-	    for (int i = 0; i < YAAS.length; i++){
+	    for (int i = 0; i < curStored; i++){
 		TEMP[i] = YAAS[i];
 	    }
 	}
@@ -120,8 +103,6 @@ public class SuperArray{
     }
 
     public void clear(){
-	TEMP = new Object[YAAS.length];
-	YAAS = TEMP;
 	curStored = 0;
     }
 
