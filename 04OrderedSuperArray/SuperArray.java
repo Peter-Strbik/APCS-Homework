@@ -76,7 +76,7 @@ public class SuperArray{
     }
     
 
-    public Object get(int index){
+    public String get(int index){
 	if (index < 0 || index >= size()){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -105,5 +105,18 @@ public class SuperArray{
     public void clear(){
 	curStored = 0;
     }
+
+    public void insertionSort(){
+        for (int i = 0; i < curStored; i++){
+	    String temp = YAAS[i];
+	    int pos = i;
+	    while(pos > 0 && temp.compareToIgnoreCase(YAAS[pos - 1]) < 0){
+		YAAS[pos] = YAAS[pos - 1];
+		pos--;
+	    }
+	    YAAS[pos] = temp;
+	}
+    }
+
 
 }

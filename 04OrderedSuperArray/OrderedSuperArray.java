@@ -13,4 +13,10 @@ public class OrderedSuperArray extends SuperArray{
 	this.add(element);
     }
 
+    public String set(int index, String element){
+	String rem = remove(index);
+	add(element);
+	return rem;
+    }
+
 }
