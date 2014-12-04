@@ -25,10 +25,10 @@ public class Driver{
 	z.add("jester");
 	z.add("lol");
 	System.out.println(z);
-	Arrays.sort(z.YAAS);
+	z.badInsertionSort();
 	
 	System.out.println(z);
-	System.out.println(x+ "\n");
+	System.out.println(x);
 	x.insertionSort();
 	System.out.println(x);
        
