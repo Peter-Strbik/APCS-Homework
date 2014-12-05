@@ -25,6 +25,10 @@ public class SuperArray{
 	return res;
     }
 
+    public String[] get(){
+	return YAAS;
+    }
+
     public void add(String e){
 	if (size() == YAAS.length){
 	    resize(curStored * 2);
@@ -116,6 +120,22 @@ public class SuperArray{
 	    }
 	    YAAS[pos] = temp;
 	}
+    }
+
+    public void selectionSort(){
+	for (int i = 0; i < curStored; i++){
+	    int pos = i;
+	    String small = YAAS[i];
+	    int indexSwitch = i;
+	    for (int j = i+1; j < curStored; j++){
+		if (YAAS[j].compareToIgnoreCase(small) < 0){
+		    small = YAAS[j];
+		    indexSwitch = j;
+		}
+	    }
+	    this.set(indexSwitch, YAAS[i]);
+	    YAAS[i] = small;
+	}   
     }
 
     public void badInsertionSort(){

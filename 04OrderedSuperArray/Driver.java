@@ -3,34 +3,23 @@ public class Driver{
 
     public static void main(String[] args){
 	SuperArray x = new SuperArray();
-	x.add("apple");
-	x.add("xylophone");
-	x.add("life");
-	x.add("tales");
-	x.add("damage");
-	x.add("battle");
-	x.add("aaron");
-	x.add("mediocre");
-	x.add("jester");
-	x.add("lol");
-	SuperArray z = new SuperArray();
-	z.add("apple");
-	z.add("xylophone");
-	z.add("life");
-	z.add("tales");
-	z.add("damage");
-	z.add("battle");
-	z.add("aaron");
-	z.add("mediocre");
-	z.add("jester");
-	z.add("lol");
-	System.out.println(z);
-	z.badInsertionSort();
-	
-	System.out.println(z);
-	System.out.println(x);
-	x.insertionSort();
-	System.out.println(x);
+	for(int i = 0; i < 500000; i++){
+	    String added = "" + i;
+	    x.add(added);
+	}
+	if (args.length > 0){
+	    if (args[0].equals("0")){
+		String[] y = x.get();
+		Arrays.sort(y);
+	    }
+	    if (args[0].equals("1")){
+		x.insertionSort();
+	    }
+	    if (args[0].equals("2")){
+		x.selectionSort();
+	    }
+	}
+
        
 
     }
