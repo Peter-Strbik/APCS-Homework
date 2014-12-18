@@ -13,7 +13,28 @@ public class Sorts{
 
     }
 
-    public static void BubbleSort(int[] L){
+    public static String name(){
+	return "Strbik,Peter";
+    }
+
+    public static int period(){
+	return 6;
+    }
+
+    public static void radix(int[] L){
+	ArrayList<ArrayList<Integer>> buckets = new ArrayList<ArrayList<Integer>>(10);
+	int maxDigits = 0;
+	for (int i = 0; i < L.length; i++){
+	    if ((int)(Math.log10(L[i])+1) > maxDigits){
+		maxDigits = (int)(Math.log10(n)+1);
+	    }
+	}
+	for (int i = 0; i < maxDigits; i++){
+	}
+    }
+	
+
+    public static void bubble(int[] L){
 	for(int i = 0; i < L.length - 1; i++){
 	    int c = 1;
 	    int temp = L[0];
@@ -31,7 +52,7 @@ public class Sorts{
 	}
     }
 
-    public static void selectionSort(int[] L){
+    public static void selection(int[] L){
 	for (int i = 0; i < L.length; i++){
 	    int pos = i;
 	    int small = L[i];
@@ -47,7 +68,7 @@ public class Sorts{
 	}   
     }
 
-    public static void insertionSort(int[] L){
+    public static void insertion(int[] L){
         for (int i = 0; i < L.length; i++){
 	    int temp = L[i];
 	    int pos = i;
